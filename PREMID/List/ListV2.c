@@ -53,6 +53,32 @@ void insertPos(EPtr L, int data, int pos) {
     }
 }
 
+void deletePos(EPtr L, int pos){
+	int x;
+	if(pos <= L->count && L->count < MAX){
+		for(x = pos; x > L->count; x++){
+			L->elem[pos] = L->elem[x + 1];
+		}
+		L->count--;
+	} else {
+		printf("Invalid position or list is empty, cannot insert element. \n");
+	}
+}
+
+int locate(EPtr L, int data){
+	int x;
+	for(x = 0; x < MAX && L->elem[x] != data; x++){}
+	return (L->elem[x] != data) ? 1 : 0;
+}
+
+int retrieve(EPtr L, int pos){
+	if(pos <= L->count && L->count < MAX){
+		return L->elem[pos];
+	} else {
+		printf("Invalid Position.");
+	}
+}
+
 void display(EPtr L){
 	int x;
 	for(x=0;x<L->count;x++){
