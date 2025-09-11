@@ -11,9 +11,9 @@ typedef struct{
 
 List initList(List L);
 List insertPos(List L, int data, int pos);
+List insertSorted(List L, int data);
 List deletePos(List L, int pos);
 int locate(List L, int data);
-//List insertSorted(List L, int data);
 void display(List L);
 
 int main (void){
@@ -63,6 +63,22 @@ List insertPos(List L, int data, int pos) {
     }
 }
 
+List insertSorted(List L, int data){
+
+	int x, pos;
+	if(L.count < MAX){
+		for(x = 0; x < L.count && L.elem[x] < data; x++){}
+		pos = x;
+		for(x = L.count; x > pos; x--){
+			L.elem[x] = L.elem[x - 1];
+		}
+		L.elem[pos] = data;
+		L.count++;
+		return L;
+	} else {
+		printf("List is full, cannot insert element. \n");
+	}
+}
 
 List deletePos(List L, int pos){
 	int x;
@@ -83,10 +99,6 @@ int locate(List L, int data){
 	return (L.elem[x] != data) ? 1 : 0;
 }
 
-
-// List insertSorted(List L, int data){
-
-// }
 
 void display(List L){
 	int x;
